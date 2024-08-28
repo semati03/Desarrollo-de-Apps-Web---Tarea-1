@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información del Dispositivo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                nombre: params.get('nombre'),
+                tipo: params.get('tipo'),
+                nombreDis: params.get('nombreDis'),
+                estado: params.get('estado'),
+                comuna: params.get('comuna'),
+                region: params.get('region'),
+                foto: params.get('foto')
+            };
+        }
+
+        function mostrarInformacionDispositivo() {
+            const info = getQueryParams();
+            document.getElementById('nombre').textContent = info.nombre;
+            document.getElementById('tipoDispositivo').textContent = info.tipo;
+            document.getElementById('nombreDispositivo').textContent = info.nombreDis;
+            document.getElementById('estadoDispositivo').textContent = info.estado;
+            document.getElementById('comunaDispositivo').textContent = info.comuna;
+            document.getElementById('regionDispositivo').textContent = info.region;
+            document.getElementById('fotoDispositivo').src = info.foto;
+            document.getElementById('fotoDispositivo').alt = 'Foto ' + info.nombreDis;
+        }
+
+        window.onload = mostrarInformacionDispositivo;
+    </script>
+</head>
+<body>
+<h1>Información del Dispositivo</h1>
+<section>
+    <h2>Detalles del Dispositivo</h2>
+    <p>Nombre: <span id="nombre"></span></p>
+    <p>Tipo: <span id="tipoDispositivo"></span></p>
+    <p>Nombre del dispositivo: <span id="nombreDispositivo"></span></p>
+    <p>Estado: <span id="estadoDispositivo"></span></p>
+    <p>Comuna: <span id="comunaDispositivo"></span></p>
+    <p>Región: <span id="regionDispositivo"></span></p>
+    <img id="fotoDispositivo" width="640" height="480" onclick="this.style.width='1280px'; this.style.height='1024px';">
+    <!-- Más detalles del dispositivo -->
+</section>
+
+<section>
+    <h2>Comentarios</h2>
+    <div>
+        <p><strong>Juan:</strong> Muy buen estado. (Fecha: 2024-08-01)</p>
+        <!-- Más comentarios -->
+    </div>
+    <form>
+        <label for="nombreComentario">Nombre:</label>
+        <input type="text" id="nombreComentario" maxlength="80" required>
+        <br>
+        <label for="textoComentario">Comentario:</label>
+        <textarea id="textoComentario" rows="4" cols="50" required></textarea>
+        <br>
+        <button type="submit">Agregar comentario</button>
+    </form>
+</section>
+<p><a href="index.html">Volver a la portada</a></p>
+</body>
+</html>

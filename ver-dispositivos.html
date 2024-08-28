@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Dispositivos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Lista de Dispositivos Donados</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Nombre Dispositivo</th>
+            <th>Estado</th>
+            <th>Comuna</th>
+            <th>Fotos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr onclick="window.location.href='informacion-dispositivos.html?nombre=Thomas%20Jackson&' +
+                                          'tipo=Notebook&' +
+                                          'nombreDis=MacBook%20Air%20M2%2015%20pulgadas&' +
+                                          'estado=Funciona%20perfecto&' +
+                                          'comuna=Santiago' +
+                                          'region=Región%20Metropolitana&' +
+                                          'foto=macbook-air.jpg'">
+            <td>Thomas Jackson </td>
+            <td>Notebook</td>
+            <td>MacBook Air M2 15 pulgadas</td>
+            <td>Funciona perfecto</td>
+            <td>Santiago, Región Metropolitana</td>
+            <td><img src="macbook-air.jpg" alt="Foto MacBook Air" width="120" height="120"></td>
+        </tr>
+        <tr onclick="window.location.href='informacion-dispositivos.html?nombre=Sebastian%Bustos&' +
+                                          'tipo=Celular&' +
+                                          'nombreDis=iPhone%20XR%20M2%2015%20pulgadas&' +
+                                          'estado=Funciona%20perfecto&' +
+                                          'comuna=Santiago' +
+                                          'region=Región%20Metropolitana&' +
+                                          'foto=macbook-air.jpg'">
+            <td>Thomas Jackson </td>
+            <td>Notebook</td>
+            <td>MacBook Air M2 15 pulgadas</td>
+            <td>Funciona perfecto</td>
+            <td>Santiago, Región Metropolitana</td>
+            <td><img src="macbook-air.jpg" alt="Foto MacBook Air" width="120" height="120"></td>
+        </tr>
+
+        <tr onclick="window.location.href='informacion-dispositivos.html?nombre=Daniel%Ruiz&tipo=Celular&nombreDis=iPhone%20XR&estado=Funciona%20a%20medias&comuna=Las%20Condes,%20Región%20Metropolitana&foto=iphone-xr.jpg'">
+            <td>Daniel Ruiz</td>
+            <td>Celular</td>
+            <td>iPhone XR</td>
+            <td>Funciona a medias</td>
+            <td>Las Condes, Región Metropolitana</td>
+            <td><img src="iphone-xr.jpg" alt="Foto iPhone XR" width="120" height="120"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p><a href="index.html">Volver a la portada</a></p>
+</body>
+</html>
