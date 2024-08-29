@@ -25,7 +25,55 @@ input, select, textarea {
 
 button {
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #9873ff;
+    color: #fff;
+    border: #ffffff;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
+button:hover {
+    background-color: #8259f6;
+}
 
+button#agregar-donacion {
+    width: auto;
+    padding: 10px;
+    background-color: #9873ff;
+    color: white;
+    border: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button#agregar-donacion:hover {
+    background-color: #8259f6;
+}
+
+button#ver-dispositivos {
+    width: auto;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ab73ff;
+    border-radius: 1px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button#ver-dispositivos:hover {
+    background-color: #8259f6;
+    color: #ffffff;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+img {
+    cursor: pointer;
+}

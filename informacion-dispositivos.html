@@ -43,25 +43,49 @@
     <p>Estado: <span id="estadoDispositivo"></span></p>
     <p>Comuna: <span id="comunaDispositivo"></span></p>
     <p>Región: <span id="regionDispositivo"></span></p>
-    <img id="fotoDispositivo" width="640" height="480" onclick="this.style.width='1280px'; this.style.height='1024px';">
-    <!-- Más detalles del dispositivo -->
+    <img id="fotoDispositivo" width="640" height="480" onclick="togglesize()" style="cursor: pointer" src="">
 </section>
+
+<script>
+    function togglesize() {
+        let foto = document.getElementById("fotoDispositivo");
+        if (foto.style.width === "1280px" && foto.style.height === "1024px") {
+            foto.style.width = "640px";
+            foto.style.height = "480px";
+        }
+        else {
+            foto.style.width = "1280px";
+            foto.style.height = "1024px";
+        }
+    }
+</script>
 
 <section>
     <h2>Comentarios</h2>
     <div>
-        <p><strong>Juan:</strong> Muy buen estado. (Fecha: 2024-08-01)</p>
-        <!-- Más comentarios -->
+        <p><strong>Juan:</strong> Hola :) (Fecha: 2024-08-01)</p>
     </div>
     <form>
         <label for="nombreComentario">Nombre:</label>
         <input type="text" id="nombreComentario" maxlength="80" required>
         <br>
-        <label for="textoComentario">Comentario:</label>
+        <label for="textoComentario" style="padding: 0 30px"></label>
         <textarea id="textoComentario" rows="4" cols="50" required></textarea>
         <br>
         <button type="submit">Agregar comentario</button>
     </form>
+    <style>
+        label, textarea {
+            vertical-align: middle;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        textarea {
+            display: inline-block;
+        }
+    </style>
 </section>
 <p><a href="index.html">Volver a la portada</a></p>
 </body>

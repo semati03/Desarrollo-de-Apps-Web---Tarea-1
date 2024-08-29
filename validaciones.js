@@ -14,16 +14,18 @@ function validarFormulario() {
         return false;
     }
 
-    // Validación del numero de celular
+    // Validación del número de celular
     let numeroCelular = document.getElementById("numeroCelular").value;
     if (numeroCelular.length != 9) {
-        alert("El número de telefono no es válido.");
+        alert("El número de teléfono debe tener 9 dígitos.");
+        return false;
     }
 
     // Validación del nombre del dispositivo
     let nombreDispositivo = document.getElementById("nombreDispositivo").value;
     if (nombreDispositivo.length < 3) {
         alert("El nombre del dispositivo debe tener más de 3 caracteres.");
+        return false;
     }
 
     // Validación de que años de uso sea un número entero
@@ -47,8 +49,27 @@ function validarFormulario() {
         return false;
     }
 
-    return true; // El formulario es válido si todas las condiciones se cumplen
+    // Mostrar mensaje de confirmación
+    document.getElementById("formDonacion").style.display = "none";
+    document.getElementById("confirmationMessage").style.display = "block";
+    return false; // Prevenir el envío del formulario hasta la confirmación
 }
+
+function confirmar() {
+    document.getElementById("confirmationMessage").style.display = "none";
+    document.getElementById("thankYouMessage").style.display = "block";
+    // Simula el envío del formulario, aquí podrías enviar los datos con fetch o similar
+}
+
+function volver() {
+    document.getElementById("formDonacion").style.display = "block";
+    document.getElementById("confirmationMessage").style.display = "none";
+}
+
+function agregarOtroDispositivo() {
+    // Implementa aquí la lógica para agregar más dispositivos
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const regionSelect = document.getElementById('region');

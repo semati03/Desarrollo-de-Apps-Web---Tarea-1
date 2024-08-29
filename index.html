@@ -1,17 +1,50 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Portada - Donaciones de Dispositivos Electrónicos</title>
+    <title>Portada</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS adicional para centrar el contenido y añadir un fondo GIF */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-image: url('fondo.gif'); /* Cambia 'ruta/a/tu-gif.gif' por la ruta de tu GIF */
+            background-size: cover; /* Ajusta el GIF para cubrir toda la pantalla */
+            background-position: center; /* Centra el GIF */
+            background-repeat: no-repeat; /* Evita que el GIF se repita */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Para alinear el título y los botones verticalmente */
+            justify-content: center; /* Centra verticalmente */
+            align-items: center; /* Centra horizontalmente */
+            height: 100vh; /* Toma toda la altura de la ventana */
+            text-align: center; /* Opcional: centra el texto dentro de los elementos */
+            background-color: rgba(200, 200, 200, 0.8); /* Fondo blanco semitransparente para el contenido */
+            border-radius: 10px; /* Bordes redondeados para el contenedor */
+            padding: 20px; /* Espacio interno para el contenedor */
+        }
+
+        .buttons {
+            margin-top: 50px; /* Espacio entre el título y los botones */
+        }
+
+        button {
+            margin: 5px; /* Espacio entre los botones */
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a la Plataforma de Donaciones de Dispositivos Electrónicos</h1>
-    <nav>
-        <ul>
-            <li><a href="agregar-donacion.html">Agregar Donación</a></li>
-            <li><a href="ver-dispositivos.html">Ver Dispositivos</a></li>
-        </ul>
-    </nav>
+<div class="container">
+    <h1 class="title" style="color:#fee2ff; font-size:50px">Reciclaje de dispositivos electrónicos</h1>
+    <div class="buttons">
+        <button onclick="location.href='agregar-donacion.html'" id="agregar-donacion" type="button">Agregar Donación</button>
+        <button onclick="location.href='ver-dispositivos.html'" id="ver-dispositivos" type="button">Ver Dispositivos</button>
+    </div>
+</div>
 </body>
 </html>

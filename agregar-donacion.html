@@ -5,88 +5,137 @@
     <title>Agregar Donación</title>
     <link rel="stylesheet" href="styles.css">
     <script src="validaciones.js" defer></script>
+    <style>
+        label, textarea {
+            vertical-align: middle;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        textarea {
+            display: inline-block;
+        }
+        #confirmationMessage, #thankYouMessage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 1000; /* Asegúrate de que esté encima del formulario */
+            display: none; /* Ocultar inicialmente */
+        }
+        #confirmationMessage button, #thankYouMessage button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        /* Estilo para el formulario */
+        #formDonacion {
+            position: relative; /* Asegura que el formulario esté en su posición normal */
+            z-index: 1; /* Debajo del mensaje de confirmación */
+        }
+    </style>
 </head>
 <body>
-    <h1>Agregar Donación</h1>
-    <form id="formDonacion" onsubmit="return validarFormulario()">
-        <fieldset>
-            <legend>Información de Contacto</legend>
-            <label for="nombreDonante">Nombre del donante:</label>
-            <input type="text" id="nombreDonante" maxlength="80" size="80" required>
-            <br>
-            <label for="emailDonante">Email del donante:</label>
-            <input type="email" id="emailDonante" size="30" required>
-            <label for="numeroCelular">Número celular del donante:</label>
-            <input type="tel" id="numeroCelular" size="15" maxlength="9">
-            <br>
-            <label for="region">Región:</label>
-            <select id="region" required>
-                <option value="">Seleccione una región</option>
-                <option value="arica-parinacota">Arica y Parinacota</option>
-                <option value="tarapaca">Tarapacá</option>
-                <option value="antofagasta">Antofagasta</option>
-                <option value="atacama">Atacama</option>
-                <option value="coquimbo">Coquimbo</option>
-                <option value="valparaiso">Valparaíso</option>
-                <option value="metropolitana">Metropolitana de Santiago</option>
-                <option value="ohiggins">O'Higgins</option>
-                <option value="maule">Maule</option>
-                <option value="ñuble">Ñuble</option>
-                <option value="biobio">Biobío</option>
-                <option value="araucania">Araucanía</option>
-                <option value="los-rios">Los Ríos</option>
-                <option value="los-lagos">Los Lagos</option>
-                <option value="aysén">Aysén</option>
-                <option value="magallanes">Magallanes y de la Antártica Chilena</option>
-            </select>
-            <label for="comuna">Comuna:</label>
-            <select id="comuna" required>
-                <option value="">Seleccione una comuna</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <legend>Información del Dispositivo</legend>
-            <label for="nombreDispositivo">Nombre del dispositivo:</label>
-            <input type="text" id="nombreDispositivo" maxlength="80" size="80" required>
-            <br>
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" rows="4" cols="50"></textarea>
-            <br>
-            <label for="tipo">Tipo:</label>
-            <select id="tipo" required>
-                <option value="">Seleccione un tipo</option>
-                <option value="Pantalla">Pantalla</option>
-                <option value="Notebook">Notebook</option>
-                <option value="Tablet">Tablet</option>
-                <option value="Celular">Celular</option>
-                <option value="Consola">Consola</option>
-                <option value="Mouse">Mouse</option>
-                <option value="Teclado">Teclado</option>
-                <option value="Impresora">Impresora</option>
-                <option value="Parlante">Parlante</option>
-                <option value="Audifonos">Audifonos</option>
-                <option value="Otro">Otro</option>
-            </select>
-            <br>
-            <label for="anosUso">Años de uso:</label>
-            <input type="number" id="anosUso" min="1" max="99" maxlength="2" size="3" required>
-            <br>
-            <label for="estado">Estado de funcionamiento:</label>
-            <select id="estado" required>
-                <option value="">Seleccione el estado</option>
-                <option value="Perfecto">Funciona perfecto</option>
-                <option value="Media">Funciona a medias</option>
-                <option value="NoFunciona">No funciona</option>
-            </select>
-            <br>
-            <label for="fotos">Fotos del producto:</label>
-            <input type="file" id="fotos" accept="image/*" multiple required>
-        </fieldset>
+<h1>Agregar Donación</h1>
+<form id="formDonacion" onsubmit="return validarFormulario()">
+    <fieldset>
+        <legend>Información de Contacto</legend>
+        <label for="nombreDonante">Nombre del donante:</label>
+        <input type="text" id="nombreDonante" maxlength="80" size="80" required>
+        <br>
+        <label for="emailDonante">Email del donante:</label>
+        <input type="email" id="emailDonante" size="30" required>
+        <label for="numeroCelular" style="padding: 0 10px">Número celular del donante:</label>
+        <input type="tel" id="numeroCelular" size="15" maxlength="9">
+        <br>
+        <label for="region">Región:</label>
+        <select id="region" required>
+            <option value="">Seleccione una región</option>
+            <option value="arica-parinacota">Arica y Parinacota</option>
+            <option value="tarapaca">Tarapacá</option>
+            <option value="antofagasta">Antofagasta</option>
+            <option value="atacama">Atacama</option>
+            <option value="coquimbo">Coquimbo</option>
+            <option value="valparaiso">Valparaíso</option>
+            <option value="metropolitana">Metropolitana de Santiago</option>
+            <option value="ohiggins">O'Higgins</option>
+            <option value="maule">Maule</option>
+            <option value="ñuble">Ñuble</option>
+            <option value="biobio">Biobío</option>
+            <option value="araucania">Araucanía</option>
+            <option value="los-rios">Los Ríos</option>
+            <option value="los-lagos">Los Lagos</option>
+            <option value="aysén">Aysén</option>
+            <option value="magallanes">Magallanes y de la Antártica Chilena</option>
+        </select>
+        <label for="comuna" style="padding: 0 10px">Comuna:</label>
+        <select id="comuna" required>
+            <option value="">Seleccione una comuna</option>
+        </select>
+    </fieldset>
+    <p style="margin-bottom: 20px;"> </p>
+    <fieldset>
+        <legend>Información del Dispositivo</legend>
+        <label for="nombreDispositivo">Nombre del dispositivo:</label>
+        <input type="text" id="nombreDispositivo" maxlength="80" size="80" required>
+        <br>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" rows="4" cols="50" placeholder="Agregar descripción..."></textarea>
+        <br>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" required>
+            <option value="">Seleccione un tipo</option>
+            <option value="Pantalla">Pantalla</option>
+            <option value="Notebook">Notebook</option>
+            <option value="Tablet">Tablet</option>
+            <option value="Celular">Celular</option>
+            <option value="Consola">Consola</option>
+            <option value="Mouse">Mouse</option>
+            <option value="Teclado">Teclado</option>
+            <option value="Impresora">Impresora</option>
+            <option value="Parlante">Parlante</option>
+            <option value="Audifonos">Audífonos</option>
+            <option value="Otro">Otro</option>
+        </select>
+        <br>
+        <label for="anosUso">Años de uso:</label>
+        <input type="number" id="anosUso" min="1" max="99" maxlength="2" size="3" required>
+        <br>
+        <label for="estado">Estado de funcionamiento:</label>
+        <select id="estado" required>
+            <option value="">Seleccione el estado</option>
+            <option value="Perfecto">Funciona perfecto</option>
+            <option value="Media">Funciona a medias</option>
+            <option value="NoFunciona">No funciona</option>
+        </select>
+        <br>
+        <label for="fotos">Fotos del producto:</label>
+        <input type="file" id="fotos" accept="image/*" multiple required>
+    </fieldset>
+    <p style="margin-bottom: 20px;"> </p>
+    <button type="button" onclick="agregarOtroDispositivo()">Agregar otro dispositivo a esta donación</button>
+    <br><br>
+    <button type="submit">Publicar esta donación</button>
+</form>
+<p><a href="index.html">Volver a la portada</a></p>
 
-        <button type="button" onclick="agregarOtroDispositivo()">Agregar otro dispositivo a esta donación</button>
-        <br><br>
-        <button type="submit">Publicar esta donación</button>
-    </form>
-    <p><a href="index.html">Volver a la portada</a></p>
-</body>
-</html>
+<div id="confirmationMessage">
+    <p>¿Confirma que desea enviar esta donación?</p>
+    <button onclick="confirmar()">Sí, confirmo</button>
+    <button onclick="volver()">No, quiero volver al formulario</button>
+</div>
+
+<div id="thankYouMessage">
+    <p>Hemos recibido la información de su donación. Muchas gracias.</p>
+    <a href="index.html"><button>Volver a la portada</button></a>
+</div>
