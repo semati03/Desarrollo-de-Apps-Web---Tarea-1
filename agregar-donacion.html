@@ -5,6 +5,7 @@
     <title>Agregar Donación</title>
     <link rel="stylesheet" href="styles.css">
     <script src="validaciones.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         label, textarea {
             vertical-align: middle;
@@ -61,22 +62,6 @@
         <label for="region">Región:</label>
         <select id="region" required>
             <option value="">Seleccione una región</option>
-            <option value="arica-parinacota">Arica y Parinacota</option>
-            <option value="tarapaca">Tarapacá</option>
-            <option value="antofagasta">Antofagasta</option>
-            <option value="atacama">Atacama</option>
-            <option value="coquimbo">Coquimbo</option>
-            <option value="valparaiso">Valparaíso</option>
-            <option value="metropolitana">Metropolitana de Santiago</option>
-            <option value="ohiggins">O'Higgins</option>
-            <option value="maule">Maule</option>
-            <option value="ñuble">Ñuble</option>
-            <option value="biobio">Biobío</option>
-            <option value="araucania">Araucanía</option>
-            <option value="los-rios">Los Ríos</option>
-            <option value="los-lagos">Los Lagos</option>
-            <option value="aysén">Aysén</option>
-            <option value="magallanes">Magallanes y de la Antártica Chilena</option>
         </select>
         <label for="comuna" style="padding: 0 10px">Comuna:</label>
         <select id="comuna" required>
@@ -84,6 +69,7 @@
         </select>
     </fieldset>
     <p style="margin-bottom: 20px;"> </p>
+    <div class="input">
     <fieldset>
         <legend>Información del Dispositivo</legend>
         <label for="nombreDispositivo">Nombre del dispositivo:</label>
@@ -121,11 +107,12 @@
         <br>
         <label for="fotos">Fotos del producto:</label>
         <input type="file" id="fotos" accept="image/*" multiple required>
-    </fieldset>
-    <p style="margin-bottom: 20px;"> </p>
+        </fieldset>
+        <p style="margin-bottom: 20px;"> </p>
+    </div>
     <button type="button" onclick="agregarOtroDispositivo()">Agregar otro dispositivo a esta donación</button>
     <br><br>
-    <button type="submit">Publicar esta donación</button>
+    <button type="submit" name="enviar">Publicar esta donación</button>
 </form>
 <p><a href="index.html">Volver a la portada</a></p>
 
