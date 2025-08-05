@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información del Dispositivo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="../static/js/validaciones_2.js" defer></script>
+
+    <style>
+        label, textarea {
+            vertical-align: middle;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        textarea {
+            display: inline-block;
+        }
+        #formComentario {
+            position: relative;
+            z-index: 1;
+        }
+        /* Estilos de las imágenes */
+        .imagen_dispositivo{
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            background: linear-gradient(45deg, #6a5af9, #8259f6);
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .error-message {
+            position: fixed;
+            top: 30%;
+            left: 25%;
+            right: 25%;
+            bottom: 30%;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 9999; /* Asegura que esté en una capa superior */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Agrega sombra para resaltar */
+        }
+    </style>
+</head>
+<body>
+<h1>Información del Dispositivo</h1>
+<section>
+    {% if dispositivo %}
+    {% for archivo in archivos[dispositivo[0]] %}
+    <img width="640" height="480" onclick="togglesize(this)" style="cursor: pointer" class="imagen_dispositivo"
+         src="{{ url_for('static', filename= 'uploads/' + archivo[2]) }}" alt="{{ archivo[2] }}">
+    {% endfor %}
+    <h2>Detalles del Donante</h2>
+        <p>Nombre: {{ dispositivo[1] }} <span id="nombre"></span></p>
+        <p>Email: {{ dispositivo[2] }} <span id="email"></span></p>
+        <p>Número de teléfono: {{ dispositivo[3] }} <span id="celular"></span></p>
+        <p>Comuna: {{ dispositivo[4] }} <span id="comunaDispositivo"></span></p>
+        <p>Región: {{ dispositivo[5] }} <span id="regionDispositivo"></span></p>
+    <h2>Detalles del Dispositivo</h2>
+        <p>Nombre del dispositivo: {{ dispositivo[6] }} <span id="nombreDispositivo"></span></p>
+        <p>Años de uso: {{ dispositivo[7] }} <span id="anos"></span></p>
+        <p>Tipo: {{ dispositivo[8] }} <span id="tipoDispositivo"></span></p>
+        <p>Estado: {{ dispositivo[9] }} <span id="estadoDispositivo"></span></p>
+    {% endif %}
+</section>
+
+<script>
+    function togglesize(foto) {
+        if (foto.style.width === "1280px" && foto.style.height === "1024px") {
+            foto.style.width = "640px";
+            foto.style.height = "480px";
+        }
+        else {
+            foto.style.width = "1280px";
+            foto.style.height = "1024px";
+        }
+    }
+
+    function cerrarMensaje() {
+        var flashMessage = document.getElementById('flash-message');
+        flashMessage.style.display = 'none';
+    }
+</script>
+
+<section>
+    <h2>Comentarios</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="error-message" id="flash-message">
+        <span>{{ message }}</span>
+        <div style="padding-top: 10px"></div>
+        <button onclick="cerrarMensaje()">Volver</button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div>
+        <p><strong>Juan:</strong> Hola (Fecha: 2024-08-01)</p>
+        <p><strong>Damarys:</strong> Me encanta ser real! (Fecha: 2024-08-02)</p>
+        {% if comentarios %}
+            {% for comentario in comentarios %}
+            <p><strong>{{ comentario[0] }}: </strong> {{ comentario[1] }} (Fecha: {{ comentario[2].strftime('%Y-%m-%d') }})</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form id="formComentario" method="POST" action="{{ url_for('informacion_dispositivos', id=dispositivo_id) }}">
+        <label for="nombreComentario">Nombre:</label>
+        <input type="text" id="nombreComentario" name="CommentName" required>
+        <br>
+        <label for="textoComentario" style="padding: 0 30px"></label>
+        <textarea id="textoComentario" rows="4" cols="50" name="CommentText"></textarea>
+        <br>
+        <button type="submit" name="comment" value="upload">Agregar comentario</button>
+    </form>
+</section>
+<div class="buttons">
+    <button id="index" type="button" onclick="window.location.href='{{ url_for('index') }}'">Volver al inicio</button>
+</div>
+</body>
+</html>

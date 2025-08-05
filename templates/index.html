@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portada</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-image: url('../static/img/fondo.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #confirmationMessage, #thankYouMessage, #alert {
+            position: fixed;
+            top: 30%;
+            left: 25%;
+            right: 25%;
+            bottom: 30%;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+        #confirmationMessage button, #thankYouMessage button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: rgba(200, 200, 200, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .buttons {
+            margin-top: 50px;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+{% if mensaje == "success" %}
+<div id="thankYouMessage">
+    <p>Hemos recibido la información de su donación. Muchas gracias.</p>
+    <div class="buttons">
+        <button onclick="location.href='index.html'" id="inicio" type="button">Volver al inicio</button>
+    </div>
+</div>
+{% elif mensaje == "error" %}
+<div id="errorMessage">
+    <p>Las validaciones no se llevaron a cabo adecuadamente.</p>
+</div>
+{% endif %}
+
+<div class="container">
+    <h1 class="title" style="color:#fee2ff; font-size:50px">Reciclaje de dispositivos electrónicos</h1>
+    <div class="buttons">
+        <button id="agregar_donacion" type="button" onclick="window.location.href='{{ url_for('agregar_donacion') }}'">Agregar Donación</button>
+        <button id="ver_dispositivos" type="button" onclick="window.location.href='{{ url_for('ver_dispositivos') }}'">Ver Dispositivos</button>
+    </div>
+    <div class="buttons">
+        <button id="grafico-tipo-dispositivos" type="button" onclick="window.location.href='{{ url_for('tipo_dispositivos') }}'">Gráfico tipo de dispositivos</button>
+        <button id="grafico-contactos-comuna" type="button" onclick="window.location.href='{{ url_for('contactos_comuna') }}'">Gráfico contactos por comuna</button>
+    </div>
+
+</div>
+</body>
+</html>

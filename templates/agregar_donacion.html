@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Donación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../static/js/validaciones.js" defer></script>
+    <style>
+        label, textarea {
+            vertical-align: middle;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        textarea {
+            display: inline-block;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+            z-index: 9998; /* Un poco menos que el mensaje */
+            display: none; /* Oculto por defecto */
+        }
+
+        #confirmationMessage, #thankYouMessage, #alert {
+            position: fixed;
+            top: 30%;
+            left: 25%;
+            right: 25%;
+            bottom: 30%;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 9999; /* Asegura que esté en una capa superior */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Agrega sombra para resaltar */
+        }
+
+        #confirmationMessage button, #thankYouMessage button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px; /* Botones también con bordes redondeados */
+        }
+
+        #formDonacion {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<h1>Agregar Donación</h1>
+<div id="overlay"></div>
+{% if mostrar_confirmacion %}
+<div id="confirmationMessage">
+    <div class="cm">
+        <p>¿Confirma que desea enviar esta donación?</p>
+        <form method="POST" action="{{ url_for('agregar_donacion') }}">
+            <button type="submit" name="confirm" value="yes">Sí, confirmo</button>
+            <button type="submit" name="confirm" value="no">No, quiero volver al formulario</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<div id="thankYouMessage" style="display: none">
+    <p>Hemos recibido la información de su donación. Muchas gracias.</p>
+    <div>
+        <a href="{{ url_for('index') }}" id="index">Volver al inicio</a>
+    </div>
+</div>
+
+{% if error %}
+<div id="alert">
+    <p id="alertMessage"> </p>
+</div>
+{% endif %}
+
+<form id="formDonacion" action="{{ url_for('agregar_donacion') }}" method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Información de Contacto</legend>
+        <label for="nombreDonante">Nombre del donante:</label>
+        <input type="text" id="nombreDonante" size="80" name="nombreContacto">
+        <br>
+        <label for="emailDonante">Email del donante:</label>
+        <input type="text" id="emailDonante" size="30" name="emailContacto">
+        <label for="numeroCelular" style="padding: 0 10px">Número celular del donante:</label>
+        <input type="tel" id="numeroCelular" size="15" maxlength="9" name="numeroContacto">
+        <br>
+        <label for="region">Región:</label>
+        <select id="region" name="region" required>
+            <option value="" disabled selected>Seleccione una región</option>
+            {% for r in regiones %}
+            <option value="{{ r.id }}">{{ r.nombre }}</option>
+            {% endfor %}
+        </select>
+        <label for="comuna">Comuna:</label>
+        <select id="comuna" name="comuna" required>
+            <option value="">Seleccione una comuna</option>
+            {% for c in comunas %}
+            <option value="{{ c.id }}" data-region="{{ c.region_id }}" style="display:none">{{ c.nombre }}</option>
+            {% endfor %}
+        </select>
+    </fieldset>
+    <p style="margin-bottom: 20px;"> </p>
+    <div class="input">
+        <fieldset>
+            <legend>Información del Dispositivo</legend>
+            <label for="nombreDispositivo">Nombre del dispositivo:</label>
+            <input type="text" id="nombreDispositivo" size="80" name="nombreDisp0">
+            <br>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" rows="4" cols="50" placeholder="Agregar descripción..." name="descripcionDisp0"></textarea>
+            <br>
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipoDisp0">
+                <option value="">Seleccione un tipo</option>
+                <option value="pantalla">Pantalla</option>
+                <option value="notebook">Notebook</option>
+                <option value="tablet">Tablet</option>
+                <option value="celular">Celular</option>
+                <option value="consola">Consola</option>
+                <option value="mouse">Mouse</option>
+                <option value="teclado">Teclado</option>
+                <option value="impresora">Impresora</option>
+                <option value="parlante">Parlante</option>
+                <option value="audífonos">Audífonos</option>
+                <option value="otro">Otro</option>
+            </select>
+            <br>
+            <label for="anosUso">Años de uso:</label>
+            <input type="number" id="anosUso" min="1" max="99" name="anosDisp0">
+            <br>
+            <label for="estado">Estado de funcionamiento:</label>
+            <select id="estado" name="estadoDisp0">
+                <option value="">Seleccione el estado</option>
+                <option value="funciona perfecto">Funciona perfecto</option>
+                <option value="funciona a medias">Funciona a medias</option>
+                <option value="no funciona">No funciona</option>
+            </select>
+            <br>
+            <label for="fotos">Fotos del producto:</label>
+            <input type="file" id="fotos" accept="image/*" name="fotosDisp0" multiple>
+        </fieldset>
+        <p style="margin-bottom: 20px;"> </p>
+    </div>
+    <button type="button" name="otroDisp" onclick="agregarOtroDispositivo()">Agregar otro dispositivo a esta donación</button>
+    <br><br>
+    <button type="submit">Publicar esta donación</button>
+</form>
+<p><a href="{{ url_for('index') }}">Volver a la portada</a></p>
+</body>
+</html>
